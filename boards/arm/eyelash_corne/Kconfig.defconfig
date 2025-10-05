@@ -58,4 +58,20 @@ config LED_PWM
 
 endif # ZMK_BACKLIGHT
 
+config EC11
+    bool "EC11 encoder support"
+    default y
+
+config EC11_TRIGGER_GLOBAL_THREADS
+    bool "EC11 encoder trigger global threads"
+    default y
+
+if EC11
+
+config ENCODER_DEFAULT_RESOLUTION
+    int "Default number of pulses per step"
+    default 4
+
+endif # EC11
+
 endif # BOARD_EYELASH_CORNE_LEFT || BOARD_EYELASH_CORNE_RIGHT
