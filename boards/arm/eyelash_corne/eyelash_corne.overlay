@@ -1,0 +1,49 @@
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/display/zmk_display.h>
+
+/ {
+    chosen {
+        zmk,display = &display;
+    };
+
+    // Simple custom display with your name
+    custom_status: custom_status_screen {
+        compatible = "zmk,display-status-screens";
+        
+        screen_0: screen_0 {
+            layer_0 {
+                position = <ZMK_POSITION_ABSOLUTE>;
+                origin-x = <0>;
+                origin-y = <20>;
+                width = <160>;
+                height = <40>;
+                color = <ZMK_DISPLAY_COLOR_WHITE>;
+                font = <(PROPORTIONAL)>;
+                font-size = <18>;
+                text {
+                    string = "ELIAS";
+                    position = <ZMK_POSITION_ABSOLUTE>;
+                    origin-x = <80>;
+                    origin-y = <40>;
+                    anchor-point = <ZMK_DISPLAY_ANCHOR_MIDDLE>;
+                };
+            };
+            
+            // Keep battery indicator
+            layer_1 {
+                position = <ZMK_POSITION_ABSOLUTE>;
+                origin-x = <10>;
+                origin-y = <5>;
+                width = <40>;
+                height = <15>;
+                battery {
+                    position = <ZMK_POSITION_ABSOLUTE>;
+                    origin-x = <0>;
+                    origin-y = <0>;
+                };
+            };
+        };
+    };
+};
