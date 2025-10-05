@@ -20,6 +20,19 @@
         bindings = <&rgb_ug RGB_BRI>, <&rgb_ug RGB_BRD>;
     };
 
+    // ADD ONLY LEFT ENCODER SENSOR DEFINITION
+    left_encoder: encoder_left {
+        compatible = "alps,ec11";
+        a-gpios = <&pro_micro 21 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        b-gpios = <&pro_micro 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        resolution = <4>;
+    };
+
+    sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&left_encoder>; // ONLY LEFT ENCODER
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -32,14 +45,7 @@
 &kp LCTRL  &kp Z  &kp X      &kp C     &kp V  &kp B       &kp SPACE              &kp DOWN              &kp N        &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp ESC
                              &kp LGUI  &mo 1  &lt 3 SPACE                                              &lt 3 ENTER  &mo 2  &kp RALT
             >;
-
         };
-    &encoder_left {
-        status = "okay";
-        resolution = <4>;
-        sensors = <&left_encoder>;
-        bindings = <&kp C_VOL_DOWN>, <&kp C_VOL_UP>;
-    };
 
         lower_layer {
             display-name = "NUMBER";
@@ -49,7 +55,6 @@
 &trans  &rgb_ug RGB_OFF  &rgb_ug RGB_ON  &trans        &trans        &rgb_ug RGB_EFF &kp C_MUTE            &trans            &rgb_ug RGB_EFR  &rgb_ug RGB_SPI  &rgb_ug RGB_BRI  &rgb_ug RGB_BRD  &kp END   &kp PG_DN
                                          &trans        &trans        &trans                                                  &kp INS          &kp DEL          &trans
             >;
-
         };
 
         raise_layer {
@@ -60,7 +65,6 @@
 &trans  &out OUT_USB  &out OUT_BLE  &none      &none      &mkp MB5  &kp C_MUTE            &trans            &kp UNDER  &kp PLUS   &kp LBRC   &kp RBRC  &kp PIPE  &kp TILDE
                                     &trans     &trans     &kp SPACE                                         &kp RET    &trans     &trans
             >;
-
         };
 
         layer_3 {
@@ -74,6 +78,8 @@
         };
     };
 };
+
+// ONLY LEFT ENCODER NODE AT THE END
 &encoder_left {
     status = "okay";
     resolution = <4>;
